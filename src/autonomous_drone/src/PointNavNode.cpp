@@ -16,9 +16,9 @@ private:
     rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_pub_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odom_sub_;
 
-    int target_x_;
-    int target_y_;
-    int distance_threshold;
+    double target_x_ = 3.0;
+    double target_y_ = 2.0;
+    double distance_threshold = 0.3;
 
     void odom_callback(const nav_msgs::msg::Odometry::SharedPtr msg)
     {
@@ -37,7 +37,7 @@ private:
         }
 
         double target_yaw = std::atan2(dy, dx);
-        double current_yaw = 2.0 * std::atan2(msg->pose.pose.position.z, msg->pose.pose.orientation.w);
+        double current_yaw = 2.0 * std::atan2(msg->pose.pose.orientation.z, msg->pose.pose.orientation.w);
 
         double yaw_error = target_yaw - current_yaw;
         while (yaw_error > M_PI) yaw_error -= 2 * M_PI;
