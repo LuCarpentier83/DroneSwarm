@@ -19,5 +19,6 @@ target_link_libraries(point_nav_node
 )
 
 install(TARGETS point_nav_node DESTINATION lib/${PROJECT_NAME})
-
+install(DIRECTORY launch DESTINATION share/${PROJECT_NAME}
+)
 ament_package()
